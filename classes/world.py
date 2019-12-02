@@ -74,27 +74,58 @@ class StartTile(MapTile):
 class EnemyTile(MapTile):
     def __init__(self, x, y):
         r = random.random()
-        if r < 0.50:
+        if r < 0.20:
             self.enemy = enemies.GiantSpider()
-            self.alive_text = "A giant spider jumps down from " \
-                              "its web in front of you!"
-            self.dead_text = "The corpse of a dead spider " \
-                             "rots on the ground."
-        elif r < 0.80:
-            self.enemy = enemies.Ogre()
-            self.alive_text = "An ogre is blocking your path!"
-            self.dead_text = "A dead ogre reminds you of your triumph."
+            self.alive_text = "A parasitic lifeform" \
+                              "rushes toward you!"
+            self.dead_text = "The corpse of a Parasite" \
+                             "lies motionless on the ground." \
+                             "It looks rather crab-like" \
+                             "and might be tasty if boiled and" \
+                             "served with some garlic butter, but" \
+                             "there's time to think about" \
+                             "food later. Onward!"
+        elif r < 0.60:
+            self.enemy = enemies.ParasiteZ()
+            self.alive_text = "A Parasite... no, a Parasite Zombie"\
+                              "emerges from the darkness!"
+            self.dead_text = "The Parasite has lost it's grip, and" \
+                             "the form underneath is revealed to be" \
+                             "human. It seems like others have crash" \
+                             "landed here. They were either ambushed"\
+                             "or voluntarily put it on their head"\
+                             "thinking it was a nice, warm hat."
+        elif r < 0.70:
+            self.enemy = enemies.GhostMonkey()
+            self.alive_text = "An unerving feeling"\
+                              "shivers down your spine."\
+                              "A Chimpanzee's Shadow materializes!"
+            self.dead_text = "The Shadow disappeared from this spot," \
+                             "although a faint scent of" \
+                             "bananas permeates the area." \
+                             "There's a small, abondoned space suit,"\
+                             "decades old, covered in moss nearby."\
+                             
         elif r < 0.95:
-            self.enemy = enemies.BatColony()
-            self.alive_text = "You hear a squeaking noise growing louder" \
-                              "...suddenly you are lost in s swarm of bats!"
-            self.dead_text = "Dozens of dead bats are scattered on the ground."
+            self.enemy = enemies.Slime()
+            self.alive_text = "You hear a slurping, goopy noise ahead." \
+                              "...suddenly you ambushed by a Slimy Blob!"
+            self.dead_text = "Chunks of translucent, slimy parts are scattered"\
+                             "about the area. There is a fruity aroma"\
+                             "exuding from the chunks."\
+                             "But you shouldn't risk eating something"\
+                             "that could be poisonous... right?"
         else:
-            self.enemy = enemies.RockMonster()
-            self.alive_text = "You've disturbed a rock monster " \
-                              "from his slumber!"
-            self.dead_text = "Defeated, the monster has reverted " \
-                             "into an ordinary rock."
+            self.enemy = enemies.SJGolem()
+            self.alive_text = "A Slimy Blob attaches itself" \
+                              "to chunks of abandoned"\
+                              "machinery and spacecraft!" \
+                              "A Space Junk Golem forms!"
+            self.dead_text = "The slimy substance has dissapated," \
+                             "and the once monstrous form" \
+                             "has reverted to space junk." \
+                             ""\
+                             "Today's just not your day."
 
         super().__init__(x, y)
 
@@ -107,6 +138,7 @@ class EnemyTile(MapTile):
             player.hp = player.hp - self.enemy.damage
             print("Enemy does {} damage. You have {} HP remaining.".
                   format(self.enemy.damage, player.hp))
+
             
 class SpecialRoom(MapTile):
     def __init__(self, x, y):
@@ -123,7 +155,7 @@ class SpecialRoom(MapTile):
                               "You can use these to buy much needed supplies!"
 
             self.missing_text = "An empty chest indicates someone beat you " \
-                                "this room."
+                                "to this room."
 
         elif r < 0.75:
             self.reward = reward.MonopolyMoney()
